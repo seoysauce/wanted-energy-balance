@@ -14,7 +14,7 @@ export const SuggestionsList = ({
   onClick,
 }: ISuggestionsListProps) => {
   return (
-    <ul>
+    <S.Container>
       {filteredSuggestions.map((suggestion, index) => {
         return (
           <S.SuggestedItem key={suggestion} isActive={index === activeSuggestionIndex}>
@@ -24,6 +24,6 @@ export const SuggestionsList = ({
           </S.SuggestedItem>
         );
       })}
-    </ul>
+    </S.Container>
   );
 };

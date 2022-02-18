@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { SearchData } from 'types/searchData';
 import { AutoComplete } from 'components';
 
+import * as S from './style';
+
 export const Main = () => {
   const [drugData, setDrugData] = useState<SearchData[]>([
     { properties: { product: '로드 중...' } },
@@ -23,5 +25,9 @@ export const Main = () => {
     fetchData();
   }, []);
 
-  return <AutoComplete suggestions={drugData} />;
+  return (
+    <S.Container>
+      <AutoComplete suggestions={drugData} />
+    </S.Container>
+  );
 };

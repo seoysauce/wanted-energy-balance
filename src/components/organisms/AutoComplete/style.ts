@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 180px;
+  width: 400px;
 `;
 
 export const SearchInput = styled.input`
-  width: 180px;
+  width: 400px;
 `;
