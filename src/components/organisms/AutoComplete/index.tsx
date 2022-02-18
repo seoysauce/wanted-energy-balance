@@ -8,19 +8,21 @@ import * as S from './style';
 
 interface IAutoCompleteProps {
   suggestions: SearchData[];
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
+export const AutoComplete = ({ suggestions, setSelectedIndex }: IAutoCompleteProps) => {
   const [
     filteredSuggestions,
     activeSuggestionIndex,
+    setActiveSuggestionIndex,
     showSuggestions,
     inputTyped,
     inputAutoCompleted,
     onKeyDown,
     onClick,
     optimizedFn,
-  ] = useAutoComplete(suggestions);
+  ] = useAutoComplete(suggestions, setSelectedIndex);
 
   return (
     <S.Container>
@@ -33,6 +35,7 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
             onKeyDown={onKeyDown}
             value={inputAutoCompleted}
             spellCheck={false}
+            placeholder="찾고 싶은 영양제를 검색해 보세요!"
           />
         </S.InputBox>
         {showSuggestions && inputTyped && (
@@ -41,6 +44,7 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
             <SuggestionsList
               filteredSuggestions={filteredSuggestions}
               activeSuggestionIndex={activeSuggestionIndex}
+              setActiveSuggestionIndex={setActiveSuggestionIndex}
               onClick={onClick}
             />
           </>

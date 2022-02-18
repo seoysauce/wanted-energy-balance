@@ -7,17 +7,32 @@ interface ISuggestionItemProps {
   index: number;
   suggestion: SearchData;
   isActive: boolean;
+  setActiveSuggestionIndex: React.Dispatch<React.SetStateAction<number>>;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-export const SuggestionItem = ({ index, suggestion, isActive, onClick }: ISuggestionItemProps) => {
+export const SuggestionItem = ({
+  index,
+  suggestion,
+  isActive,
+  setActiveSuggestionIndex,
+  onClick,
+}: ISuggestionItemProps) => {
   return (
-    <S.Container isActive={isActive}>
-      <div onClick={onClick} onKeyDown={() => {}} role="none">
-        <S.Image src={`https://loremflickr.com/40/40?lock=${index}`} alt="영양제 사진" />
+    <S.Container isActive={isActive} onMouseOver={() => setActiveSuggestionIndex(index)}>
+      <div
+        onClick={onClick}
+        data-index={suggestion.properties.index}
+        onKeyDown={() => {}}
+        role="none"
+      >
+        <S.Image
+          src={`https://picsum.photos/id/${suggestion.properties.index + 50}/200/200`}
+          alt="영양제 사진"
+        />
         <S.Description>
           <S.DrugName>{suggestion.properties.product}</S.DrugName>
-          <S.Brand>{suggestion.properties.brand}</S.Brand>
+          <S.Brand>{suggestion.properties.brand || '티라노 제약'}</S.Brand>
         </S.Description>
       </div>
     </S.Container>

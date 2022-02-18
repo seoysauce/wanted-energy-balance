@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchData } from 'types/searchData';
-import { AutoComplete } from 'components';
+import { AutoComplete, ResultBox } from 'components';
 import { Logo } from 'assets';
 import { disassembleHangul } from 'utils';
 
@@ -8,8 +8,9 @@ import * as S from './style';
 
 export const Main = () => {
   const [drugData, setDrugData] = useState<SearchData[]>([
-    { properties: { product: '로드 중...', disassemble: [''] } },
+    { properties: { product: '로드 중...', disassemble: [''], index: 0 } },
   ]);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +33,14 @@ export const Main = () => {
   return (
     <S.Container>
       <Logo />
-      <AutoComplete suggestions={drugData} />
+      <AutoComplete suggestions={drugData} setSelectedIndex={setSelectedIndex} />
+      {selectedIndex !== null && (
+        <ResultBox
+          name={drugData[selectedIndex].properties.product}
+          imgUrl={`https://picsum.photos/id/${selectedIndex + 50}/200/200`}
+          brand={drugData[selectedIndex].properties.brand || '티라노 제약'}
+        />
+      )}
     </S.Container>
   );
 };

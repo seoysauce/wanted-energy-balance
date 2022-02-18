@@ -1,4 +1,4 @@
-export const Cho = [
+export const CHO = [
   'ㄱ',
   'ㄲ',
   'ㄴ',
@@ -19,7 +19,7 @@ export const Cho = [
   'ㅍ',
   'ㅎ',
 ];
-export const Jung = [
+export const JUNG = [
   'ㅏ',
   'ㅐ',
   'ㅑ',
@@ -42,7 +42,7 @@ export const Jung = [
   'ㅢ',
   'ㅣ',
 ];
-export const Jong = [
+export const JONG = [
   '',
   'ㄱ',
   'ㄲ',

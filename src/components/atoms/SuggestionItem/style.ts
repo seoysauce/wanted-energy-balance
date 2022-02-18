@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.li<{ isActive: boolean }>`
-  color: ${(props) => (props.isActive ? '#fc9700' : 'black')};
-  background: ${(props) => (props.isActive ? '#d3d3d3' : '#white')};
+  background: ${(props) => (props.isActive ? '#F4F3F3' : 'white')};
   cursor: pointer;
   width: 100%;
   font-weight: 700;
   max-height: 100px;
+  padding: 10px;
 `;
 
 export const Description = styled.div`
@@ -30,6 +30,7 @@ export const Image = styled.img`
   width: 40px;
   vertical-align: top;
   float: left;
+  border-radius: 5px;
 `;
 
 export const DrugName = styled.span`
@@ -46,7 +47,8 @@ export const DrugName = styled.span`
 
 export const Brand = styled.span`
   -webkit-text-size-adjust: 100%;
-  font-weight: 300;
+  font-weight: 400;
+  color: #c2c2c2;
   word-break: break-word;
   box-sizing: inherit;
   position: relative;

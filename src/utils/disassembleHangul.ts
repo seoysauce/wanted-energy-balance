@@ -1,4 +1,4 @@
-import { Cho, Jung, Jong } from 'commons/hangul';
+import { CHO, JUNG, JONG } from 'commons/hangul';
 import { SearchData } from 'types/searchData';
 
 const toHangulUniCode = (word: string) => {
@@ -17,7 +17,7 @@ const disassembleWord = (word: string) => {
   const jungCode = ((wordCode - jongCode) / 28) % 21;
   const choCode = ((wordCode - jongCode) / 28 - jungCode) / 21;
 
-  return [Cho[choCode], Jung[jungCode], Jong[jongCode]].filter((sung) => sung !== '');
+  return [CHO[choCode], JUNG[jungCode], JONG[jongCode]].filter((sung) => sung !== '');
 };
 
 export const disassembleSentence = (sentence: string) => {
@@ -28,10 +28,11 @@ export const disassembleSentence = (sentence: string) => {
 };
 
 export const disassembleHangul = (drugData: SearchData[]) => {
-  return drugData.map((drug) => ({
+  return drugData.map((drug, idx) => ({
     properties: {
       ...drug.properties,
       disassemble: disassembleSentence(drug.properties.product),
+      index: idx,
     },
   }));
 };

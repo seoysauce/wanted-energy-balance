@@ -1,12 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { SearchData } from 'types/searchData';
 import { disassembleSentence, isPartOf } from 'utils';
+import { AUTO_COMPLETE } from 'commons';
 
 export const useAutoComplete = (
   suggestions: SearchData[],
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>,
 ): [
   SearchData[],
   number,
+  React.Dispatch<React.SetStateAction<number>>,
   boolean,
   string,
   string,
@@ -84,7 +87,7 @@ export const useAutoComplete = (
     }
 
     if (e.key === 'ArrowDown') {
-      if (activeSuggestionIndex === filteredSuggestions.length - 1) {
+      if (activeSuggestionIndex === AUTO_COMPLETE.MAX_SHOW - 1) {
         focusSuggestion(0);
       } else {
         focusSuggestion(activeSuggestionIndex + 1);
@@ -99,14 +102,16 @@ export const useAutoComplete = (
   };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
-    setBothInputs(target.innerText);
+    const target = e.currentTarget as HTMLDivElement;
+    setBothInputs('');
+    setSelectedIndex(Number(target.dataset.index));
     resetSuggestionList();
   };
 
   return [
     filteredSuggestions,
     activeSuggestionIndex,
+    setActiveSuggestionIndex,
     showSuggestions,
     inputTyped,
     inputAutoCompleted,
