@@ -15,7 +15,7 @@ export const SuggestionsList = ({
 }: ISuggestionsListProps) => {
   return (
     <S.Container>
-      {filteredSuggestions.map((suggestion, index) => {
+      {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
         return (
           <S.SuggestedItem key={suggestion} isActive={index === activeSuggestionIndex}>
             <div onClick={onClick} onKeyDown={() => {}} role="none">
