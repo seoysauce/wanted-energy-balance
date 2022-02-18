@@ -32,7 +32,7 @@ export const SuggestionItem = ({
         />
         <S.Description>
           <S.DrugName>{suggestion.properties.product}</S.DrugName>
-          <S.Brand>{suggestion.properties.brand || 'No Brand'}</S.Brand>
+          <S.Brand>{suggestion.properties.brand || '티라노 제약'}</S.Brand>
         </S.Description>
       </div>
     </S.Container>
