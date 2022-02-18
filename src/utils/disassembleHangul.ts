@@ -20,10 +20,10 @@ const disassembleWord = (word: string) => {
   return [Cho[choCode], Jung[jungCode], Jong[jongCode]].filter((sung) => sung !== '');
 };
 
-const disassembleSentence = (sentence: string) => {
+export const disassembleSentence = (sentence: string) => {
   return sentence.split('').reduce((prev: string[], curr) => {
     if (isHangul(curr)) return [...prev, ...disassembleWord(curr)];
-    return [...prev, curr];
+    return [...prev, curr.toLowerCase()];
   }, []);
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SearchData } from 'types/searchData';
+import { disassembleSentence, isPartOf } from 'utils';
 
 export const useAutoComplete = (
   suggestions: SearchData[],
@@ -19,8 +20,8 @@ export const useAutoComplete = (
   const [inputTyped, setInputTyped] = useState('');
   const [inputAutoCompleted, setInputAutoCompleted] = useState('');
 
-  const filterLogic = (userInput: string, suggestion: SearchData) => {
-    return suggestion.properties.product.toLowerCase().indexOf(userInput.toLowerCase()) > -1;
+  const filterLogic = (disassembledUserInput: string[], suggestion: SearchData) => {
+    return isPartOf(suggestion.properties.disassemble, disassembledUserInput);
   };
 
   const resetSuggestionList = () => {
@@ -48,7 +49,7 @@ export const useAutoComplete = (
     const userInput = e.target.value;
 
     const possibleSuggestions = suggestions
-      .filter((suggestion) => filterLogic(userInput, suggestion))
+      .filter((suggestion) => filterLogic(disassembleSentence(userInput), suggestion))
       .map((suggestion) => suggestion.properties.product);
 
     setBothInputs(e.target.value);
