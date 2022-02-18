@@ -10,6 +10,10 @@ export const Main = () => {
   const [drugData, setDrugData] = useState<SearchData[]>([
     { properties: { product: '로드 중...', disassemble: [''] } },
   ]);
+  const [selectedItem, setSelectedItem] = useState({
+    name: '',
+    imgUrl: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,8 +34,10 @@ export const Main = () => {
   return (
     <S.Container>
       <Logo />
-      <AutoComplete suggestions={drugData} />
-      <ResultBox name="제품명" />
+      <AutoComplete suggestions={drugData} setSelectedItem={setSelectedItem} />
+      {selectedItem.name.length > 0 ? (
+        <ResultBox name={selectedItem.name} imgUrl={selectedItem.imgUrl} />
+      ) : null}
     </S.Container>
   );
 };

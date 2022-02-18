@@ -2,20 +2,21 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 500px;
-  bottom: -200px;
-  z-index: -10;
+  position: relative;
+  top: 100px;
   display: flex;
   align-items: center;
   gap: 20px;
   background: white;
   padding: 20px;
   border-radius: 20px;
+  /* border: 2px solid black; */
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
 `;
 
 export const Image = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 70px;
+  height: 70px;
   border-radius: 10px;
 `;
 

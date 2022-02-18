@@ -8,19 +8,21 @@ import * as S from './style';
 
 interface IAutoCompleteProps {
   suggestions: SearchData[];
+  setSelectedItem: React.Dispatch<React.SetStateAction<{ name: string; imgUrl: string }>>;
 }
 
-export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
+export const AutoComplete = ({ suggestions, setSelectedItem }: IAutoCompleteProps) => {
   const [
     filteredSuggestions,
     activeSuggestionIndex,
+    setActiveSuggestionIndex,
     showSuggestions,
     inputTyped,
     inputAutoCompleted,
     onKeyDown,
     onClick,
     optimizedFn,
-  ] = useAutoComplete(suggestions);
+  ] = useAutoComplete(suggestions, setSelectedItem);
 
   return (
     <S.Container>
@@ -41,6 +43,7 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
             <SuggestionsList
               filteredSuggestions={filteredSuggestions}
               activeSuggestionIndex={activeSuggestionIndex}
+              setActiveSuggestionIndex={setActiveSuggestionIndex}
               onClick={onClick}
             />
           </>

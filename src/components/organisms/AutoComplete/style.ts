@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 400px;
   margin-bottom: 70px;
+  position: absolute;
+  top: 60px;
+  z-index: 10;
 `;
 
 export const Wrap = styled.div`

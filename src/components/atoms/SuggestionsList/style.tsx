@@ -11,20 +11,16 @@ export const Container = styled.ul`
 `;
 
 export const SuggestedItem = styled.li<{ isActive: boolean }>`
-  color: ${(props) => (props.isActive ? 'black' : 'black')};
+  /* color: ${(props) => (props.isActive ? 'red' : 'black')}; */
   background: ${(props) => (props.isActive ? '#F4F3F3' : 'white')};
   cursor: pointer;
   width: 100%;
   font-weight: 700;
-  &:hover {
-    background: #f4f3f3;
-  }
+  transition: all 0.3s ease-out;
 `;
 
 export const Div = styled.div`
-  /* height: 30px; */
   padding: 7px 10px;
   display: flex;
   align-items: center;
-  /* padding: 0 10px; */
 `;

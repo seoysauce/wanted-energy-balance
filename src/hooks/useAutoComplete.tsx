@@ -4,9 +4,11 @@ import { disassembleSentence, isPartOf } from 'utils';
 
 export const useAutoComplete = (
   suggestions: SearchData[],
+  setSelectedItem: React.Dispatch<React.SetStateAction<{ name: string; imgUrl: string }>>,
 ): [
   Array<string>,
   number,
+  React.Dispatch<React.SetStateAction<number>>,
   boolean,
   string,
   string,
@@ -100,13 +102,15 @@ export const useAutoComplete = (
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
-    setBothInputs(target.innerText);
+    setBothInputs('');
+    setSelectedItem({ name: target.innerText, imgUrl: 'https://picsum.photos/200' });
     resetSuggestionList();
   };
 
   return [
     filteredSuggestions,
     activeSuggestionIndex,
+    setActiveSuggestionIndex,
     showSuggestions,
     inputTyped,
     inputAutoCompleted,
