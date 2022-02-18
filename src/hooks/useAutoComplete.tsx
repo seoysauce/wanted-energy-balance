@@ -6,7 +6,7 @@ export const useAutoComplete = (
   suggestions: SearchData[],
   setSelectedItem: React.Dispatch<React.SetStateAction<{ name: string; imgUrl: string }>>,
 ): [
-  Array<string>,
+  SearchData[],
   number,
   React.Dispatch<React.SetStateAction<number>>,
   boolean,
@@ -16,7 +16,7 @@ export const useAutoComplete = (
   (e: React.MouseEvent<HTMLDivElement>) => void,
   (value: string) => void,
 ] => {
-  const [filteredSuggestions, setFilteredSuggestions] = useState<Array<string>>([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<SearchData[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputTyped, setInputTyped] = useState('');
@@ -38,7 +38,7 @@ export const useAutoComplete = (
 
   const focusSuggestion = (focusTarget: number) => {
     setActiveSuggestionIndex(focusTarget);
-    setInputAutoCompleted(filteredSuggestions[focusTarget]);
+    setInputAutoCompleted(filteredSuggestions[focusTarget].properties.product);
   };
 
   const removeFocusSuggestion = () => {
@@ -52,9 +52,9 @@ export const useAutoComplete = (
   };
 
   const onChange = (value: string) => {
-    const possibleSuggestions = suggestions
-      .filter((suggestion) => filterLogic(disassembleSentence(value), suggestion, value))
-      .map((suggestion) => suggestion.properties.product);
+    const possibleSuggestions = suggestions.filter((suggestion) =>
+      filterLogic(disassembleSentence(value), suggestion, value),
+    );
 
     setInputTyped(value);
     setFilteredSuggestions(possibleSuggestions);

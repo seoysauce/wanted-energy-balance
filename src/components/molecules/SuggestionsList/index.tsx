@@ -1,9 +1,11 @@
 import React from 'react';
+import { SuggestionItem } from 'components';
+import { SearchData } from 'types/searchData';
 
 import * as S from './style';
 
 interface ISuggestionsListProps {
-  filteredSuggestions: Array<string>;
+  filteredSuggestions: SearchData[];
   activeSuggestionIndex: number;
   setActiveSuggestionIndex: React.Dispatch<React.SetStateAction<number>>;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -17,19 +19,16 @@ export const SuggestionsList = ({
 }: ISuggestionsListProps) => {
   return (
     <S.Container>
-      {filteredSuggestions.map((suggestion, index) => {
+      {filteredSuggestions.slice(0, 8).map((suggestion, index) => {
         return (
-          <S.SuggestedItem
-            key={suggestion}
-            onMouseOver={() => {
-              setActiveSuggestionIndex(index);
-            }}
+          <SuggestionItem
+            key={suggestion.properties.product}
+            index={index}
+            suggestion={suggestion}
             isActive={index === activeSuggestionIndex}
-          >
-            <S.Div onClick={onClick} onKeyDown={() => {}} role="none">
-              {suggestion}
-            </S.Div>
-          </S.SuggestedItem>
+            setActiveSuggestionIndex={setActiveSuggestionIndex}
+            onClick={onClick}
+          />
         );
       })}
     </S.Container>
