@@ -20,8 +20,12 @@ export const useAutoComplete = (
   const [inputTyped, setInputTyped] = useState('');
   const [inputAutoCompleted, setInputAutoCompleted] = useState('');
 
-  const filterLogic = (disassembledUserInput: string[], suggestion: SearchData) => {
-    return isPartOf(suggestion.properties.disassemble, disassembledUserInput);
+  const filterLogic = (disassembledUserInput: string[], suggestion: SearchData, value: string) => {
+    return isPartOf({
+      properties: suggestion.properties,
+      disassembledInput: disassembledUserInput,
+      value,
+    });
   };
 
   const resetSuggestionList = () => {
@@ -47,7 +51,7 @@ export const useAutoComplete = (
 
   const onChange = (value: string) => {
     const possibleSuggestions = suggestions
-      .filter((suggestion) => filterLogic(disassembleSentence(value), suggestion))
+      .filter((suggestion) => filterLogic(disassembleSentence(value), suggestion, value))
       .map((suggestion) => suggestion.properties.product);
 
     setInputTyped(value);
