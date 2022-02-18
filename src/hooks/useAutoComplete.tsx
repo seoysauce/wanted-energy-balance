@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { SearchData } from 'types/searchData';
 
 export const useAutoComplete = (
@@ -8,10 +8,9 @@ export const useAutoComplete = (
   number,
   boolean,
   string,
-  string,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
   (e: React.KeyboardEvent<HTMLInputElement>) => void,
   (e: React.MouseEvent<HTMLDivElement>) => void,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
 ] => {
   const [filteredSuggestions, setFilteredSuggestions] = useState<Array<string>>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
@@ -58,6 +57,20 @@ export const useAutoComplete = (
     setShowSuggestions(possibleSuggestions.length > 0);
   };
 
+  const debounce = (func: any) => {
+    let timerId: ReturnType<typeof setTimeout> | null;
+    return (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (timerId) clearTimeout(timerId);
+
+      timerId = setTimeout(() => {
+        timerId = null;
+        func(e);
+      }, 500);
+    };
+  };
+
+  const optimizedFn = useCallback(debounce(onChange), []);
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!showSuggestions) {
       if (e.key === 'ArrowDown' && filteredSuggestions.length > 0) {
@@ -93,9 +106,8 @@ export const useAutoComplete = (
     activeSuggestionIndex,
     showSuggestions,
     inputTyped,
-    inputAutoCompleted,
-    onChange,
     onKeyDown,
     onClick,
+    optimizedFn,
   ];
 };

@@ -15,20 +15,14 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
     activeSuggestionIndex,
     showSuggestions,
     inputTyped,
-    inputAutoCompleted,
-    onChange,
     onKeyDown,
     onClick,
+    optimizedFn,
   ] = useAutoComplete(suggestions);
 
   return (
     <S.Container>
-      <S.SearchInput
-        type="text"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputAutoCompleted}
-      />
+      <S.SearchInput type="text" onChange={(e) => optimizedFn(e)} onKeyDown={onKeyDown} />
       {showSuggestions && inputTyped && (
         <SuggestionsList
           filteredSuggestions={filteredSuggestions}
