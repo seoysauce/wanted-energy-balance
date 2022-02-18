@@ -1,10 +1,11 @@
 import React from 'react';
 import { SuggestionItem } from 'components';
+import { SearchData } from 'types/searchData';
 
 import * as S from './style';
 
 interface ISuggestionsListProps {
-  filteredSuggestions: Array<string>;
+  filteredSuggestions: SearchData[];
   activeSuggestionIndex: number;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
@@ -19,7 +20,7 @@ export const SuggestionsList = ({
       {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
         return (
           <SuggestionItem
-            key={suggestion}
+            key={suggestion.properties.product}
             suggestion={suggestion}
             isActive={index === activeSuggestionIndex}
             onClick={onClick}

@@ -1,9 +1,10 @@
 import React from 'react';
+import { SearchData } from 'types/searchData';
 
 import * as S from './style';
 
 interface ISuggestionItemProps {
-  suggestion: string;
+  suggestion: SearchData;
   isActive: boolean;
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
@@ -12,7 +13,7 @@ export const SuggestionItem = ({ suggestion, isActive, onClick }: ISuggestionIte
   return (
     <S.Container isActive={isActive}>
       <div onClick={onClick} onKeyDown={() => {}} role="none">
-        {suggestion}
+        {suggestion.properties.product}
       </div>
     </S.Container>
   );
