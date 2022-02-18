@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SearchData } from 'types/searchData';
-import { AutoComplete } from 'components';
+import { AutoComplete, ResultBox } from 'components';
 import { Logo } from 'assets';
 import { disassembleHangul } from 'utils';
 
@@ -31,6 +31,7 @@ export const Main = () => {
     <S.Container>
       <Logo />
       <AutoComplete suggestions={drugData} />
+      <ResultBox name="제품명" />
     </S.Container>
   );
 };

@@ -18,9 +18,9 @@ export const SuggestionsList = ({
       {filteredSuggestions.map((suggestion, index) => {
         return (
           <S.SuggestedItem key={suggestion} isActive={index === activeSuggestionIndex}>
-            <div onClick={onClick} onKeyDown={() => {}} role="none">
+            <S.Div onClick={onClick} onKeyDown={() => {}} role="none">
               {suggestion}
-            </div>
+            </S.Div>
           </S.SuggestedItem>
         );
       })}
