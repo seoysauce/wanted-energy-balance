@@ -1,4 +1,5 @@
 import React from 'react';
+import { SuggestionItem } from 'components';
 
 import * as S from './style';
 
@@ -17,11 +18,12 @@ export const SuggestionsList = ({
     <S.Container>
       {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
         return (
-          <S.SuggestedItem key={suggestion} isActive={index === activeSuggestionIndex}>
-            <div onClick={onClick} onKeyDown={() => {}} role="none">
-              {suggestion}
-            </div>
-          </S.SuggestedItem>
+          <SuggestionItem
+            key={suggestion}
+            suggestion={suggestion}
+            isActive={index === activeSuggestionIndex}
+            onClick={onClick}
+          />
         );
       })}
     </S.Container>
