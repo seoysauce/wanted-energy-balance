@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.ul`
-  max-height: 400px;
+  max-height: 500px;
   overflow-y: auto;
   background-color: white;
   display: flex;
@@ -9,6 +9,6 @@ export const Container = styled.ul`
   margin: 5px 10px;
   padding: 15px;
   gap: 15px;
-  font-size: 16px;
+  font-size: 13px;
   border-radius: 20px;
 `;

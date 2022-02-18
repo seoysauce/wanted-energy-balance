@@ -17,10 +17,11 @@ export const SuggestionsList = ({
 }: ISuggestionsListProps) => {
   return (
     <S.Container>
-      {filteredSuggestions.slice(0, 10).map((suggestion, index) => {
+      {filteredSuggestions.slice(0, 8).map((suggestion, index) => {
         return (
           <SuggestionItem
             key={suggestion.properties.product}
+            index={index}
             suggestion={suggestion}
             isActive={index === activeSuggestionIndex}
             onClick={onClick}
