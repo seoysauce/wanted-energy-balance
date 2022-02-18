@@ -1,1 +1,1 @@
-export {};
+export { disassembleHangul } from './disassembleHangul';
