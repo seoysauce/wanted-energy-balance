@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SearchData } from 'types/searchData';
 import { AutoComplete } from 'components';
+import { Logo } from 'assets';
 
 import * as S from './style';
 
@@ -27,6 +28,7 @@ export const Main = () => {
 
   return (
     <S.Container>
+      <Logo />
       <AutoComplete suggestions={drugData} />
     </S.Container>
   );

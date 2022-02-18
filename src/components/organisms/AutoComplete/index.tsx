@@ -2,6 +2,7 @@ import React from 'react';
 import { SuggestionsList } from 'components';
 import { useAutoComplete } from 'hooks/useAutoComplete';
 import { SearchData } from 'types/searchData';
+import { Magnifier } from 'assets';
 
 import * as S from './style';
 
@@ -23,19 +24,28 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
 
   return (
     <S.Container>
-      <S.SearchInput
-        type="text"
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        value={inputAutoCompleted}
-      />
-      {showSuggestions && inputTyped && (
-        <SuggestionsList
-          filteredSuggestions={filteredSuggestions}
-          activeSuggestionIndex={activeSuggestionIndex}
-          onClick={onClick}
-        />
-      )}
+      <S.Wrap>
+        <S.InputBox>
+          <Magnifier />
+          <S.SearchInput
+            type="text"
+            onChange={onChange}
+            onKeyDown={onKeyDown}
+            value={inputAutoCompleted}
+            spellCheck={false}
+          />
+        </S.InputBox>
+        {showSuggestions && inputTyped && (
+          <>
+            <S.Line />
+            <SuggestionsList
+              filteredSuggestions={filteredSuggestions}
+              activeSuggestionIndex={activeSuggestionIndex}
+              onClick={onClick}
+            />
+          </>
+        )}
+      </S.Wrap>
     </S.Container>
   );
 };
