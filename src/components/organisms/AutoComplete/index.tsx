@@ -17,9 +17,9 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
     showSuggestions,
     inputTyped,
     inputAutoCompleted,
-    onChange,
     onKeyDown,
     onClick,
+    optimizedFn,
   ] = useAutoComplete(suggestions);
 
   return (
@@ -29,7 +29,7 @@ export const AutoComplete = ({ suggestions }: IAutoCompleteProps) => {
           <Magnifier />
           <S.SearchInput
             type="text"
-            onChange={onChange}
+            onChange={(e) => optimizedFn(e.target.value)}
             onKeyDown={onKeyDown}
             value={inputAutoCompleted}
             spellCheck={false}
