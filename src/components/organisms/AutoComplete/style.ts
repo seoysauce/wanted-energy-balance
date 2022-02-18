@@ -11,7 +11,6 @@ export const Wrap = styled.div`
   width: 400px;
   border-radius: 20px;
   display: flex;
-  /* gap: 10px; */
   font-size: 30px;
   display: flex;
   flex-direction: column;
@@ -39,7 +38,7 @@ export const InputBox = styled.div`
 export const SearchInput = styled.input`
   outline: none;
   border: transparent;
-  width: 95%;
   height: 30px;
+  width: 95%;
   font-size: 16px;
 `;

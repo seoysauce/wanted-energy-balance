@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.ul`
-  /* position: absolute; */
   max-height: 300px;
-  top: 60px;
   overflow-y: auto;
   background-color: white;
-  padding: 20px;
   display: flex;
   flex-direction: column;
+  margin: 5px 10px;
   padding: 15px;
-  gap: 10px;
+  gap: 15px;
   font-size: 16px;
   border-radius: 20px;
-  margin-top: 10px;
 `;
 
 export const SuggestedItem = styled.li<{ isActive: boolean }>`
