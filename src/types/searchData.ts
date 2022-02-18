@@ -1,3 +1,6 @@
 export interface SearchData {
-  text: string;
+  properties: {
+    product: string;
+    tags?: Array<string>;
+  };
 }

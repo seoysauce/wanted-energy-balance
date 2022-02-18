@@ -20,7 +20,7 @@ export const useAutoComplete = (
   const [inputAutoCompleted, setInputAutoCompleted] = useState('');
 
   const filterLogic = (userInput: string, suggestion: SearchData) => {
-    return suggestion.text.toLowerCase().indexOf(userInput.toLowerCase()) > -1;
+    return suggestion.properties.product.toLowerCase().indexOf(userInput.toLowerCase()) > -1;
   };
 
   const resetSuggestionList = () => {
@@ -49,7 +49,7 @@ export const useAutoComplete = (
 
     const possibleSuggestions = suggestions
       .filter((suggestion) => filterLogic(userInput, suggestion))
-      .map((suggestion) => suggestion.text);
+      .map((suggestion) => suggestion.properties.product);
 
     setBothInputs(e.target.value);
 
