@@ -8,10 +8,10 @@ import * as S from './style';
 
 interface IAutoCompleteProps {
   suggestions: SearchData[];
-  setSelectedItem: React.Dispatch<React.SetStateAction<{ name: string; imgUrl: string }>>;
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export const AutoComplete = ({ suggestions, setSelectedItem }: IAutoCompleteProps) => {
+export const AutoComplete = ({ suggestions, setSelectedIndex }: IAutoCompleteProps) => {
   const [
     filteredSuggestions,
     activeSuggestionIndex,
@@ -22,7 +22,7 @@ export const AutoComplete = ({ suggestions, setSelectedItem }: IAutoCompleteProp
     onKeyDown,
     onClick,
     optimizedFn,
-  ] = useAutoComplete(suggestions, setSelectedItem);
+  ] = useAutoComplete(suggestions, setSelectedIndex);
 
   return (
     <S.Container>
@@ -35,6 +35,7 @@ export const AutoComplete = ({ suggestions, setSelectedItem }: IAutoCompleteProp
             onKeyDown={onKeyDown}
             value={inputAutoCompleted}
             spellCheck={false}
+            placeholder="찾고 싶은 영양제를 검색해 보세요!"
           />
         </S.InputBox>
         {showSuggestions && inputTyped && (

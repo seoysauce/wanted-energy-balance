@@ -20,11 +20,19 @@ export const SuggestionItem = ({
 }: ISuggestionItemProps) => {
   return (
     <S.Container isActive={isActive} onMouseOver={() => setActiveSuggestionIndex(index)}>
-      <div onClick={onClick} onKeyDown={() => {}} role="none">
-        <S.Image src={`https://picsum.photos/id/${index + 50}/200/200`} alt="영양제 사진" />
+      <div
+        onClick={onClick}
+        data-index={suggestion.properties.index}
+        onKeyDown={() => {}}
+        role="none"
+      >
+        <S.Image
+          src={`https://picsum.photos/id/${suggestion.properties.index + 50}/200/200`}
+          alt="영양제 사진"
+        />
         <S.Description>
           <S.DrugName>{suggestion.properties.product}</S.DrugName>
-          <S.Brand>{suggestion.properties.brand || '브랜드 없음'}</S.Brand>
+          <S.Brand>{suggestion.properties.brand || 'No Brand'}</S.Brand>
         </S.Description>
       </div>
     </S.Container>

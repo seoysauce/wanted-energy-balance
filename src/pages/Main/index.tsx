@@ -8,12 +8,9 @@ import * as S from './style';
 
 export const Main = () => {
   const [drugData, setDrugData] = useState<SearchData[]>([
-    { properties: { product: '로드 중...', disassemble: [''] } },
+    { properties: { product: '로드 중...', disassemble: [''], index: 0 } },
   ]);
-  const [selectedItem, setSelectedItem] = useState({
-    name: '',
-    imgUrl: '',
-  });
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,10 +33,14 @@ export const Main = () => {
   return (
     <S.Container>
       <Logo />
-      <AutoComplete suggestions={drugData} setSelectedItem={setSelectedItem} />
-      {selectedItem.name.length > 0 ? (
-        <ResultBox name={selectedItem.name} imgUrl={selectedItem.imgUrl} />
-      ) : null}
+      <AutoComplete suggestions={drugData} setSelectedIndex={setSelectedIndex} />
+      {selectedIndex !== null && (
+        <ResultBox
+          name={drugData[selectedIndex].properties.product}
+          imgUrl={`https://picsum.photos/id/${selectedIndex + 50}/200/200`}
+          brand={drugData[selectedIndex].properties.brand || '티라노 제약'}
+        />
+      )}
     </S.Container>
   );
 };

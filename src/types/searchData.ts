@@ -4,5 +4,6 @@ export interface SearchData {
     tags?: Array<string>;
     brand?: string;
     disassemble: Array<string>;
+    index: number;
   };
 }

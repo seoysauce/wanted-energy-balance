@@ -1,6 +1,7 @@
 import React from 'react';
 import { SuggestionItem } from 'components';
 import { SearchData } from 'types/searchData';
+import { AUTO_COMPLETE } from 'commons';
 
 import * as S from './style';
 
@@ -19,7 +20,7 @@ export const SuggestionsList = ({
 }: ISuggestionsListProps) => {
   return (
     <S.Container>
-      {filteredSuggestions.slice(0, 8).map((suggestion, index) => {
+      {filteredSuggestions.slice(0, AUTO_COMPLETE.MAX_SHOW).map((suggestion, index) => {
         return (
           <SuggestionItem
             key={suggestion.properties.product}

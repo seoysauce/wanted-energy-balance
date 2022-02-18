@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
 import { SearchData } from 'types/searchData';
 import { disassembleSentence, isPartOf } from 'utils';
+import { AUTO_COMPLETE } from 'commons';
 
 export const useAutoComplete = (
   suggestions: SearchData[],
-  setSelectedItem: React.Dispatch<React.SetStateAction<{ name: string; imgUrl: string }>>,
+  setSelectedIndex: React.Dispatch<React.SetStateAction<number | null>>,
 ): [
   SearchData[],
   number,
@@ -86,7 +87,7 @@ export const useAutoComplete = (
     }
 
     if (e.key === 'ArrowDown') {
-      if (activeSuggestionIndex === filteredSuggestions.length - 1) {
+      if (activeSuggestionIndex === AUTO_COMPLETE.MAX_SHOW - 1) {
         focusSuggestion(0);
       } else {
         focusSuggestion(activeSuggestionIndex + 1);
@@ -101,9 +102,9 @@ export const useAutoComplete = (
   };
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
+    const target = e.currentTarget as HTMLDivElement;
     setBothInputs('');
-    setSelectedItem({ name: target.innerText, imgUrl: 'https://picsum.photos/200' });
+    setSelectedIndex(Number(target.dataset.index));
     resetSuggestionList();
   };
 

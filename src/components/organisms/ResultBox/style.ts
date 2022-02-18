@@ -26,6 +26,12 @@ export const Info = styled.div`
   gap: 10px;
 `;
 
+export const Brand = styled.span`
+  font-weight: 500;
+  color: #c1c1c1;
+  font-size: 14px;
+`;
+
 export const Name = styled.span`
   font-weight: 700;
 `;
