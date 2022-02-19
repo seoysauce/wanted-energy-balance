@@ -3,6 +3,7 @@ interface IisPartOfParam {
     product: string;
     tags?: Array<string>;
     disassemble: Array<string>;
+    brand?: string;
   };
   disassembledInput: Array<string>;
   value: string;
@@ -27,12 +28,16 @@ const isTagInInput = (value: string, tags: Array<string>) => {
   return tags.includes(value);
 };
 
+const isBrandInInput = (value: string, brand: string) => {
+  return brand === value;
+};
+
 export const isPartOf = ({ properties, disassembledInput, value }: IisPartOfParam) => {
-  if (isDrugNameInInput(properties.disassemble, disassembledInput)) {
-    return true;
-  }
-  if (properties.tags && isTagInInput(value, properties.tags)) {
-    return true;
-  }
+  if (isDrugNameInInput(properties.disassemble, disassembledInput)) return true;
+
+  if (properties.tags && isTagInInput(value, properties.tags)) return true;
+
+  if (properties.brand && isBrandInInput(value, properties.brand)) return true;
+
   return false;
 };
