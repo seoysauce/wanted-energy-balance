@@ -56,6 +56,7 @@ export const useAutoComplete = (
   const onChange = (value: string) => {
     const possibleSuggestions = suggestions
       .map((suggestion) => filterLogic(disassembleSentence(value), suggestion, value))
+      .filter((suggestion) => suggestion.properties.priority !== 100000)
       .sort((a, b) => a.properties.priority - b.properties.priority)
       .slice(0, AUTO_COMPLETE.MAX_SHOW);
 
