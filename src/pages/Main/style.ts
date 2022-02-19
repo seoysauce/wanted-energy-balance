@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { STYLE } from 'commons';
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -11,4 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  @media ${STYLE.PHONE} {
+    width: 100%;
+  }
 `;
