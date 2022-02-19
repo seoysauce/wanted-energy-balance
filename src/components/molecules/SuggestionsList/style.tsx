@@ -7,9 +7,7 @@ export const Container = styled.ul`
   display: flex;
   flex-direction: column;
   margin: 10px 10px;
-  /* margin-top: 10px; */
-  /* padding: 15px; */
-  /* gap: 15px; */
   font-size: 13px;
-  /* border-radius: 20px; */
+  overflow-y: scroll;
+  max-height: 50vh;
 `;
