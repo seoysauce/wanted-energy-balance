@@ -1,5 +1,6 @@
 import React from 'react';
 import { SearchData } from 'types/searchData';
+import { defaultImage } from 'assets';
 
 import * as S from './style';
 
@@ -20,15 +21,16 @@ export const SuggestionItem = ({
 }: ISuggestionItemProps) => {
   return (
     <S.Container isActive={isActive} onMouseOver={() => setActiveSuggestionIndex(index)}>
-      <div
-        onClick={onClick}
-        data-index={suggestion.properties.index}
-        onKeyDown={() => {}}
-        role="none"
-      >
+      <div onClick={onClick} data-index={suggestion.properties.index} role="none">
         <S.Image
           src={`https://picsum.photos/id/${suggestion.properties.index + 50}/200/200`}
-          alt="영양제 사진"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+
+            target.onerror = null;
+            target.src = defaultImage;
+          }}
+          alt={suggestion.properties.product}
         />
         <S.Description>
           <S.DrugName>{suggestion.properties.product}</S.DrugName>

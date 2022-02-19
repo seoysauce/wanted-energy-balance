@@ -31,6 +31,8 @@ export const Image = styled.img`
   vertical-align: top;
   float: left;
   border-radius: 5px;
+  height: 40px;
+  object-fit: cover;
 `;
 
 export const DrugName = styled.span`

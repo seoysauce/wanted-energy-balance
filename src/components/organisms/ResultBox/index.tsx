@@ -1,3 +1,4 @@
+import { defaultImage } from 'assets';
 import React from 'react';
 import * as S from './style';
 
@@ -10,7 +11,16 @@ interface IResultBoxProps {
 export const ResultBox = ({ name, imgUrl, brand }: IResultBoxProps) => {
   return (
     <S.Container>
-      <S.Image src={imgUrl} alt={name} />
+      <S.Image
+        src={imgUrl}
+        alt={name}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+
+          target.onerror = null;
+          target.src = defaultImage;
+        }}
+      />
       <S.Info>
         <S.Name>{name}</S.Name>
         <S.Brand>{brand}</S.Brand>

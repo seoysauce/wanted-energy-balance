@@ -18,6 +18,7 @@ export const Image = styled.img`
   width: 70px;
   height: 70px;
   border-radius: 10px;
+  object-fit: cover;
 `;
 
 export const Info = styled.div`
