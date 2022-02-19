@@ -3,22 +3,41 @@ interface IisPartOfParam {
     product: string;
     tags?: Array<string>;
     disassemble: Array<string>;
+    brand?: string;
   };
   disassembledInput: Array<string>;
   value: string;
 }
 
-export const isPartOf = ({ properties, disassembledInput, value }: IisPartOfParam) => {
-  let array1Idx = 0;
-  let array2Idx = 0;
-  const isTagExist = 'tags' in properties;
+const isDrugNameInInput = (
+  drugNameDisassembled: Array<string>,
+  inputDisassembled: Array<string>,
+) => {
+  let drugNameIdx = 0;
+  let inputIdx = 0;
 
-  while (array1Idx < properties.disassemble.length && array2Idx < disassembledInput.length) {
-    if (properties.disassemble[array1Idx] === disassembledInput[array2Idx]) array2Idx += 1;
-    array1Idx += 1;
+  while (drugNameIdx < drugNameDisassembled.length && inputIdx < inputDisassembled.length) {
+    if (drugNameDisassembled[drugNameIdx] === inputDisassembled[inputIdx]) inputIdx += 1;
+    drugNameIdx += 1;
   }
 
-  if (array2Idx === disassembledInput.length || (isTagExist && properties.tags?.includes(value)))
-    return true;
+  return inputIdx === inputDisassembled.length;
+};
+
+const isTagInInput = (value: string, tags: Array<string>) => {
+  return tags.includes(value);
+};
+
+const isBrandInInput = (value: string, brand: string) => {
+  return brand === value;
+};
+
+export const isPartOf = ({ properties, disassembledInput, value }: IisPartOfParam) => {
+  if (isDrugNameInInput(properties.disassemble, disassembledInput)) return true;
+
+  if (properties.tags && isTagInInput(value, properties.tags)) return true;
+
+  if (properties.brand && isBrandInInput(value, properties.brand)) return true;
+
   return false;
 };
