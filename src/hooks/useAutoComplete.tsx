@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { SearchData } from 'types/searchData';
-import { disassembleSentence, isPartOf } from 'utils';
+import { SearchDataWithPrio } from 'types/serachDataWIthPrio';
+import { disassembleSentence, calcPrio } from 'utils';
 import { AUTO_COMPLETE } from 'commons';
 
 export const useAutoComplete = (
@@ -17,14 +18,14 @@ export const useAutoComplete = (
   (e: React.MouseEvent<HTMLDivElement>) => void,
   (value: string) => void,
 ] => {
-  const [filteredSuggestions, setFilteredSuggestions] = useState<SearchData[]>([]);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<SearchDataWithPrio[]>([]);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [inputTyped, setInputTyped] = useState('');
   const [inputAutoCompleted, setInputAutoCompleted] = useState('');
 
   const filterLogic = (disassembledUserInput: string[], suggestion: SearchData, value: string) => {
-    return isPartOf({
+    return calcPrio({
       properties: suggestion.properties,
       disassembledInput: disassembledUserInput,
       value,
@@ -53,9 +54,10 @@ export const useAutoComplete = (
   };
 
   const onChange = (value: string) => {
-    const possibleSuggestions = suggestions.filter((suggestion) =>
-      filterLogic(disassembleSentence(value), suggestion, value),
-    );
+    const possibleSuggestions = suggestions
+      .map((suggestion) => filterLogic(disassembleSentence(value), suggestion, value))
+      .sort((a, b) => a.properties.priority - b.properties.priority)
+      .slice(0, AUTO_COMPLETE.MAX_SHOW);
 
     setInputTyped(value);
     setFilteredSuggestions(possibleSuggestions);
