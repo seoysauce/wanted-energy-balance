@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { STYLE } from 'commons';
 
 export const Container = styled.div`
   width: 500px;
@@ -10,8 +11,10 @@ export const Container = styled.div`
   background: white;
   padding: 20px;
   border-radius: 20px;
-  /* border: 2px solid black; */
   box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+  @media ${STYLE.PHONE} {
+    width: 90%;
+  }
 `;
 
 export const Image = styled.img`

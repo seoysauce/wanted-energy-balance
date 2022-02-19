@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { STYLE } from 'commons';
 
 export const Container = styled.div`
   width: 400px;
@@ -6,6 +7,11 @@ export const Container = styled.div`
   position: absolute;
   top: 60px;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  @media ${STYLE.PHONE} {
+    width: 90%;
+  }
 `;
 
 export const Wrap = styled.div`
