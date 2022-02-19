@@ -98,6 +98,11 @@ export const useAutoComplete = (
       } else {
         focusSuggestion(activeSuggestionIndex - 1);
       }
+    } else if (e.key === 'Enter' && activeSuggestionIndex >= 0) {
+      setBothInputs('');
+      const target = document.querySelector(`#id-${activeSuggestionIndex}`) as HTMLDivElement;
+      setSelectedIndex(Number(target?.dataset.index));
+      resetSuggestionList();
     }
   };
 

@@ -21,7 +21,12 @@ export const SuggestionItem = ({
 }: ISuggestionItemProps) => {
   return (
     <S.Container isActive={isActive} onMouseOver={() => setActiveSuggestionIndex(index)}>
-      <div onClick={onClick} data-index={suggestion.properties.index} role="none">
+      <div
+        onClick={onClick}
+        id={`id-${index}`}
+        data-index={suggestion.properties.index}
+        role="none"
+      >
         <S.Image
           src={`https://picsum.photos/id/${suggestion.properties.index + 50}/200/200`}
           onError={(e) => {
